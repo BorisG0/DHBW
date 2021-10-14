@@ -9,22 +9,11 @@ public class EuclideanAlgorithm {
     }
 
     public static int ggT(int a, int b){
-
-        if(a < b){
-            a = a + b;
-            b = a - b;
-            a = a - b;
+        int c;
+        while(a != b){
+            if(a > b) a -= b;
+            else b -= a;
         }
-
-        int c = 0;
-
-        while(a % b != 0){
-            c = a % b;
-            a = b;
-            b = c;
-
-        }
-
-        return c;
+        return b;
     }
 }
