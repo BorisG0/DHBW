@@ -9,7 +9,6 @@ public class EuclideanAlgorithm {
     }
 
     public static int ggT(int a, int b){
-        int c;
         while(a != b){
             if(a > b) a -= b;
             else b -= a;
