@@ -26,10 +26,16 @@ public class ClassicAlgorithms {
         int[] z = siebDesEratosthenes(n);
 
 
+        int counter = 0;
         for(int i: z){
-            if(i != -1)
-            System.out.println(i);
+            if(i != -1){
+                System.out.println(i);
+                counter++;
+            }
+
         }
+
+        System.out.println("Gesamt Primzahlen: " + counter);
 
 
 
