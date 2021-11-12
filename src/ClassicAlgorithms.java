@@ -42,6 +42,10 @@ public class ClassicAlgorithms {
 
     }
 
+    public static boolean aufgabe4(boolean a, boolean b){
+        return !(a == b);
+    }
+
     public static int[] siebDesEratosthenes(int n){
         int[] zahlen = new int[n];
 
