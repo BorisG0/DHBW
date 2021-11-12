@@ -3,14 +3,16 @@ import java.util.Scanner;
 public class ClassicAlgorithms {
     public static void main(String[] args) {
 
-        int a = 391;
-        int b = 544;
+        int n;
 
-        System.out.println("ggT: a = " + a + ", b = " + b + ", ggT: " + ggT(a, b));
-
-        int n = 5;
-
-        System.out.println("Fakultät: n = " + n + ", fac(n) = " + fac(n));
+//        int a = 391;
+//        int b = 544;
+//
+//        System.out.println("ggT: a = " + a + ", b = " + b + ", ggT: " + ggT(a, b));
+//
+//        n = 5;
+//
+//        System.out.println("Fakultät: n = " + n + ", fac(n) = " + fac(n));
 
 
         Scanner sc = new Scanner(System.in);
