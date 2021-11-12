@@ -51,11 +51,14 @@ public class ClassicAlgorithms {
     public static int[] siebDesEratosthenes(int n){
         int[] zahlen = new int[n];
 
+
+
         int s = (int) Math.sqrt((double)n); //Schranke
 
         for(int i = 0; i < n; i++){
             zahlen[i] = i+1;
         }
+        zahlen[0] = -1;
 
         int a = 2;
 
