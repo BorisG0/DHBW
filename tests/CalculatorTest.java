@@ -1,5 +1,7 @@
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -34,5 +36,15 @@ class CalculatorTest {
 
     void multiply(){
         assertEquals(16, cut.multiply(4, 4));
+    }
+
+    @ParameterizedTest(name = "{0} plus {1} equals {2}")
+    @CsvSource({
+            "-14124, 200, -13924",
+            "10, 15, 25"
+    })
+    void addParameterized(double a, double b, double exp){
+        double act = cut.add(a, b);
+        assertEquals(act, exp);
     }
 }
