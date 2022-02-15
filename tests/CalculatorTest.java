@@ -1,3 +1,4 @@
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -29,5 +30,9 @@ class CalculatorTest {
     @org.junit.jupiter.api.Test
     void subtract() {
         assertEquals(0, cut.subtract(2, 2));
+    }
+
+    void multiply(){
+        assertEquals(16, cut.multiply(4, 4));
     }
 }
