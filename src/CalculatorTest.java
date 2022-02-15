@@ -1,3 +1,5 @@
+import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class CalculatorTest {
@@ -11,6 +13,12 @@ class CalculatorTest {
 
     @org.junit.jupiter.api.AfterEach
     void tearDown() {
+    }
+
+    @Test
+    void addAndSubtract(){
+        assertEquals(5, cut.add(3, 2));
+        assertEquals(3, cut.subtract(5, 2));
     }
 
     @org.junit.jupiter.api.Test
