@@ -46,6 +46,15 @@ public class Outerclass {
         myInnerAnonymousClass.print(message);
     }
 
+    void printFromLambdaFunction(String message){
+        InnerInterface myLambdaFunction = (String lambdaMessage) -> {
+            System.out.println(this.getClass().getName() +
+                    " - Lambda Funktion sagt: " +
+                    lambdaMessage);
+        };
+        myLambdaFunction.print(message);
+    }
+
     public static void main(String[] args) {
         String message = "Hello World!";
 
@@ -60,6 +69,8 @@ public class Outerclass {
         outerclass.printFromInnerLocalClass(message);
 
         outerclass.printFromInnerAnonymousClass(message);
+
+        outerclass.printFromLambdaFunction(message);
 
     }
 }
