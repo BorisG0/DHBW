@@ -36,4 +36,8 @@ public class FullName implements Comparable<FullName>{
         return true;
     }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, familyName);
+    }
 }

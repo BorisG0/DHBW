@@ -1,7 +1,4 @@
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 
 public class SetExamples {
 
@@ -24,6 +21,7 @@ public class SetExamples {
         for (String s : names){
             System.out.println(s);
         }
+
 
         System.out.println("\nAdd Viktor: " + names.add("Viktor"));
 
@@ -57,6 +55,29 @@ public class SetExamples {
 
         for(FullName currentName: namesBySignCount){
             System.out.println(currentName);
+        }
+
+
+
+        System.out.println("\nArrayList custom sort:");
+        List<FullName> namesArrayList = new ArrayList<FullName>();
+        namesArrayList.add(new FullName("Boris", "Gratchev"));
+        namesArrayList.add(new FullName("Ivanka", "Trump"));
+        namesArrayList.add(new FullName("Ronald", "McDonald"));
+        namesArrayList.add(new FullName("Donald", "Trump"));
+
+        for(FullName n: namesArrayList){
+            System.out.println(n);
+        }
+
+        Collections.sort(namesArrayList, (FullName name1, FullName name2)->{
+            return name1.toString().length() - name2.toString().length();
+        });
+
+        System.out.println("\nsorted custom");
+
+        for(FullName n: namesArrayList){
+            System.out.println(n);
         }
 
 
