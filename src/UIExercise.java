@@ -19,17 +19,49 @@ public class UIExercise extends JFrame {
         Border borderInner = BorderFactory.createEtchedBorder();
         Border borderOuter = BorderFactory.createTitledBorder(borderInner, "Connection");
 
+
         JPanel connectionPanel = new JPanel(new GridLayout(0, 2));
         connectionPanel.setBorder(borderOuter);
 
-        connectionPanel.add(new JLabel("User:"));
-        connectionPanel.add(new JTextField());
+        JPanel flowPanelInput = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        flowPanelInput.add(new JLabel("User:"));
+        connectionPanel.add(flowPanelInput);
 
-        connectionPanel.add(new JLabel("Password:"));
-        connectionPanel.add(new JPasswordField());
+        flowPanelInput = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        flowPanelInput.add(new JTextField(3));
+        connectionPanel.add(flowPanelInput);
 
-        connectionPanel.add(new JLabel("Type:"));
-        connectionPanel.add(new JTextField());
+        flowPanelInput = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        flowPanelInput.add(new JLabel("Password:"));
+        connectionPanel.add(flowPanelInput);
+
+        flowPanelInput = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        flowPanelInput.add(new JPasswordField(4));
+        connectionPanel.add(flowPanelInput);
+
+        flowPanelInput = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        flowPanelInput.add(new JLabel("Type:"));
+        connectionPanel.add(flowPanelInput);
+
+        flowPanelInput = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        flowPanelInput.add(new JTextField());
+        connectionPanel.add(flowPanelInput);
+
+        flowPanelInput = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        flowPanelInput.add(new JLabel("Host:"));
+        connectionPanel.add(flowPanelInput);
+
+        flowPanelInput = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        flowPanelInput.add(new JTextField(4));
+        connectionPanel.add(flowPanelInput);
+
+        flowPanelInput = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        flowPanelInput.add(new JLabel("Port:"));
+        connectionPanel.add(flowPanelInput);
+
+        flowPanelInput = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        flowPanelInput.add(new JTextField(1));
+        connectionPanel.add(flowPanelInput);
 
         return connectionPanel;
     }
