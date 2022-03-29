@@ -7,7 +7,7 @@ public class GridLayoutExampleUI extends JFrame {
 
         JPanel uiContent = new JPanel();
 
-        uiContent.setLayout(new GridLayout(2, 4));
+        uiContent.setLayout(new GridLayout(2, 6));
 
         uiContent.add(new JLabel("Zelle1"));
         uiContent.add(new JLabel("Zelle2"));
