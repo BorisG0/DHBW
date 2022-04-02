@@ -44,7 +44,8 @@ public class UIExercise extends JFrame {
         connectionPanel.add(flowPanelInput);
 
         flowPanelInput = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        flowPanelInput.add(new JTextField());
+        String[] types = {"FTP", "HTTP"};
+        flowPanelInput.add(new JComboBox(types));
         connectionPanel.add(flowPanelInput);
 
         flowPanelInput = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -73,11 +74,25 @@ public class UIExercise extends JFrame {
         JPanel filePanel = new JPanel(new GridLayout(0, 2));
         filePanel.setBorder(borderOuter);
 
-        filePanel.add(new JLabel("Source:"));
-        filePanel.add(new JTextField());
 
-        filePanel.add(new JLabel("Destination:"));
-        filePanel.add(new JPasswordField());
+        JPanel flowPanelInput;
+
+        flowPanelInput = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        flowPanelInput.add(new JLabel("Source:"));
+        filePanel.add(flowPanelInput);
+
+        flowPanelInput = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        flowPanelInput.add(new JTextField(3));
+        filePanel.add(flowPanelInput);
+
+
+        flowPanelInput = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        flowPanelInput.add(new JLabel("Destination:"));
+        filePanel.add(flowPanelInput);
+
+        flowPanelInput = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        flowPanelInput.add(new JTextField(3));
+        filePanel.add(flowPanelInput);
 
 
         return filePanel;
