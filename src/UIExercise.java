@@ -82,7 +82,7 @@ public class UIExercise extends JFrame {
         filePanel.add(flowPanelInput);
 
         flowPanelInput = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        flowPanelInput.add(new JTextField(3));
+        flowPanelInput.add(new JTextField(6));
         filePanel.add(flowPanelInput);
 
 
@@ -91,7 +91,7 @@ public class UIExercise extends JFrame {
         filePanel.add(flowPanelInput);
 
         flowPanelInput = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        flowPanelInput.add(new JTextField(3));
+        flowPanelInput.add(new JTextField(6));
         filePanel.add(flowPanelInput);
 
 
