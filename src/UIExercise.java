@@ -7,12 +7,20 @@ public class UIExercise extends JFrame {
         this.setTitle("Logon");
 
         loadSouthPanel();
-        this.add(loadConnectionPanel(), BorderLayout.WEST);
-        this.add(loadFilePanel(), BorderLayout.EAST);
+
+        JPanel connectionPanel = loadConnectionPanel();
+        JPanel filePanel = loadFilePanel();
+
+        this.add(connectionPanel, BorderLayout.WEST);
+        this.add(filePanel, BorderLayout.EAST);
+
 
         this.pack();
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.setVisible(true);
+
+
+
     }
 
     private JPanel loadConnectionPanel(){
