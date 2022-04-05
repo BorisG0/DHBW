@@ -2,6 +2,10 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.text.MaskFormatter;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.text.ParseException;
 
 public class UIExercise extends JFrame {
@@ -33,6 +37,8 @@ public class UIExercise extends JFrame {
         Border borderInner = BorderFactory.createEtchedBorder();
         Border borderOuter = BorderFactory.createTitledBorder(borderInner, "Connection");
 
+        JFormattedTextField portField = new JFormattedTextField(new MaskFormatter("#####"));
+
 
         JPanel connectionPanel = new JPanel(new GridLayout(0, 2));
         connectionPanel.setBorder(borderOuter);
@@ -59,7 +65,25 @@ public class UIExercise extends JFrame {
 
         flowPanelInput = new JPanel(new FlowLayout(FlowLayout.LEFT));
         String[] types = {"FTP", "HTTP"};
-        flowPanelInput.add(new JComboBox(types));
+        JComboBox typesBox = new JComboBox(types);
+        typesBox.addItemListener(e -> {
+//            System.out.println("Ausgelöst");
+//            System.out.println("ItemEvent(Item) für JComboBox: " + e.getItem());
+//            System.out.println("ItemEvent(ParameterString) für JComboBox: " + e.paramString());
+//            System.out.println("ItemEvent(StateChange) für JComboBox: " + e.getStateChange());
+
+            if(e.getStateChange() == 1){
+                int portValue = 0;
+                if(e.getItem().equals("FTP")){
+                    portValue = 21;
+                }else if (e.getItem().equals("HTTP")){
+                    portValue = 80;
+                }
+                portField.setValue(portValue);
+            }
+
+        });
+        flowPanelInput.add(typesBox);
         connectionPanel.add(flowPanelInput);
 
         flowPanelInput = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -75,7 +99,7 @@ public class UIExercise extends JFrame {
         connectionPanel.add(flowPanelInput);
 
         flowPanelInput = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        flowPanelInput.add(new JFormattedTextField(new MaskFormatter("#####")));
+        flowPanelInput.add(portField);
         connectionPanel.add(flowPanelInput);
 
         return connectionPanel;
@@ -114,7 +138,12 @@ public class UIExercise extends JFrame {
 
     private void loadSouthPanel(){
         JPanel southPanel = new JPanel(new FlowLayout());
-        southPanel.add(new JButton("OK"));
+
+        JButton okButton = new JButton("OK");
+        okButton.addActionListener(e -> {
+            System.out.println("OKButton pressed: " + e.paramString());
+        });
+        southPanel.add(okButton);
         southPanel.add(new JButton("Cancel"));
         this.add(southPanel, BorderLayout.SOUTH);
     }
