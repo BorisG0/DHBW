@@ -1,19 +1,25 @@
 import javax.swing.*;
 import javax.swing.border.Border;
+import javax.swing.text.MaskFormatter;
 import java.awt.*;
+import java.text.ParseException;
 
 public class UIExercise extends JFrame {
-    private UIExercise(){
+    private UIExercise() throws ParseException {
         this.setTitle("Logon");
 
         loadSouthPanel();
 
+
         JPanel connectionPanel = loadConnectionPanel();
         JPanel filePanel = loadFilePanel();
 
-        this.add(connectionPanel, BorderLayout.WEST);
-        this.add(filePanel, BorderLayout.EAST);
+        JPanel outerTopPanel = new JPanel(new FlowLayout());
 
+        outerTopPanel.add(connectionPanel, BorderLayout.WEST);
+        outerTopPanel.add(filePanel, BorderLayout.EAST);
+
+        this.add(outerTopPanel, BorderLayout.CENTER);
 
         this.pack();
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -23,7 +29,7 @@ public class UIExercise extends JFrame {
 
     }
 
-    private JPanel loadConnectionPanel(){
+    private JPanel loadConnectionPanel() throws ParseException {
         Border borderInner = BorderFactory.createEtchedBorder();
         Border borderOuter = BorderFactory.createTitledBorder(borderInner, "Connection");
 
@@ -69,7 +75,7 @@ public class UIExercise extends JFrame {
         connectionPanel.add(flowPanelInput);
 
         flowPanelInput = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        flowPanelInput.add(new JTextField(1));
+        flowPanelInput.add(new JFormattedTextField(new MaskFormatter("#####")));
         connectionPanel.add(flowPanelInput);
 
         return connectionPanel;
@@ -114,6 +120,10 @@ public class UIExercise extends JFrame {
     }
 
     public static void main(String[] args) {
-        UIExercise uiExercise = new UIExercise();
+        try {
+            UIExercise uiExercise = new UIExercise();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 }
