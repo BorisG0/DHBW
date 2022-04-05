@@ -2,15 +2,42 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.text.MaskFormatter;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
+import java.awt.event.*;
 import java.text.ParseException;
 
 public class UIExercise extends JFrame {
     private UIExercise() throws ParseException {
+
         this.setTitle("Logon");
+
+
+        MouseListener mouseListender = new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                System.out.println("mouse clicked");
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+            }
+        };
+
 
         loadSouthPanel();
 
@@ -28,6 +55,7 @@ public class UIExercise extends JFrame {
         this.pack();
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.setVisible(true);
+        this.addMouseListener(mouseListender);
 
 
 
@@ -137,18 +165,41 @@ public class UIExercise extends JFrame {
     }
 
     private void loadSouthPanel(){
+        final String cancelCommand = "cancel", okCommand = "ok";
+
+        ActionListener myButtonListener = (ActionEvent e) ->{
+            System.out.println(e.paramString());
+            if(e.getActionCommand().equals(okCommand)){
+                System.out.println("alles OK");
+            }else if(e.getActionCommand().equals(cancelCommand)){
+                System.out.println("es wird gecancelt");
+            }
+            System.exit(0);
+        };
+
+
         JPanel southPanel = new JPanel(new FlowLayout());
 
         JButton okButton = new JButton("OK");
-        okButton.addActionListener(e -> {
-            System.out.println("OKButton pressed: " + e.paramString());
-        });
+        okButton.addActionListener(myButtonListener);
+        okButton.setActionCommand(okCommand);
         southPanel.add(okButton);
-        southPanel.add(new JButton("Cancel"));
+
+
+        JButton cancelButton = new JButton("Cancel");
+        cancelButton.addActionListener(myButtonListener);
+        cancelButton.setActionCommand(cancelCommand);
+        southPanel.add(cancelButton);
+
         this.add(southPanel, BorderLayout.SOUTH);
     }
 
     public static void main(String[] args) {
+        GraphicsDevice defaultGraphicsDevice = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
+
+        System.out.println("Screen Dimensions: " + defaultGraphicsDevice.getDefaultConfiguration().getBounds());
+
+
         try {
             UIExercise uiExercise = new UIExercise();
         } catch (ParseException e) {
