@@ -52,6 +52,44 @@ public class UIExercise extends JFrame {
 
         this.add(outerTopPanel, BorderLayout.CENTER);
 
+
+        JMenuBar menuBar = new JMenuBar();
+
+        JMenu fileMenu = new JMenu("File");
+        JMenuItem saveItem, openItem;
+
+        saveItem = new JMenuItem("save");
+        fileMenu.add(saveItem);
+
+        openItem = new JMenuItem("open");
+        fileMenu.add(openItem);
+
+        menuBar.add(fileMenu);
+
+        JMenu viewMenu = new JMenu("View");
+        JMenuItem closeItem, extendItem, packItem;
+
+        closeItem = new JMenuItem("close");
+        closeItem.addActionListener((ActionEvent e) ->{
+            System.exit(0);
+        });
+        viewMenu.add(closeItem);
+
+        extendItem = new JMenuItem("extend screen");
+        extendItem.addActionListener(e -> {
+            this.setBounds(0, 0, 1000, 800);
+        });
+        viewMenu.add(extendItem);
+
+        packItem = new JMenuItem("pack screen");
+        packItem.addActionListener(e -> {
+            this.pack();
+        });
+        viewMenu.add(packItem);
+
+        menuBar.add(viewMenu);
+
+        this.setJMenuBar(menuBar);
         this.pack();
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.setVisible(true);
