@@ -60,6 +60,24 @@ public class FileSystem {
 
         System.out.println("Existiert: " + myDirectory.exists());
 
+        if(!myDirectory.exists()){
+            myDirectory.mkdir();
+            System.out.println("Existiert: " + myDirectory.exists());
+        }
+
+        File myFile = new File(myDirectory.getPath() + File.separator + "myFile.txt");
+
+        if(!myFile.exists()){
+            try{
+                System.out.println(myFile.getName() + " existiert: " + myFile.exists());
+                myFile.createNewFile();
+                System.out.println(myFile.getName() + " existiert: " + myFile.exists());
+            }catch(Exception e){
+                System.out.println("problem: " + e.getMessage());
+            }
+
+        }
+
 
     }
 
