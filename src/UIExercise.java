@@ -68,6 +68,7 @@ public class UIExercise extends JFrame {
 
         JMenu viewMenu = new JMenu("View");
         JMenuItem closeItem, extendItem, packItem;
+        JMenu screenMenu = new JMenu("screen");
 
         closeItem = new JMenuItem("close");
         closeItem.addActionListener((ActionEvent e) ->{
@@ -75,18 +76,19 @@ public class UIExercise extends JFrame {
         });
         viewMenu.add(closeItem);
 
-        extendItem = new JMenuItem("extend screen");
+        extendItem = new JMenuItem("extend");
         extendItem.addActionListener(e -> {
             this.setBounds(0, 0, 1000, 800);
         });
-        viewMenu.add(extendItem);
+        screenMenu.add(extendItem);
 
-        packItem = new JMenuItem("pack screen");
+        packItem = new JMenuItem("pack");
         packItem.addActionListener(e -> {
             this.pack();
         });
-        viewMenu.add(packItem);
+        screenMenu.add(packItem);
 
+        viewMenu.add(screenMenu);
         menuBar.add(viewMenu);
 
         this.setJMenuBar(menuBar);
