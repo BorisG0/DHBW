@@ -1,8 +1,10 @@
 public class LinkedWordList {
 
     private WordNode firstWordNode = null;
+    private int size = 0;
 
     public void add(String word){
+        this.size++;
         WordNode newWordNode = new WordNode(word);
 
         if(firstWordNode == null){
@@ -32,15 +34,8 @@ public class LinkedWordList {
     }
 
     public int size(){
-        int size = 0;
 
-        WordNode currentNode = firstWordNode;
-
-        while(currentNode != null){
-            size++;
-            currentNode = currentNode.nextWordNode;
-        }
-        return size;
+        return this.size;
     }
 
     public void printWordList(){
@@ -62,6 +57,7 @@ public class LinkedWordList {
         while(currentNode != null){
             if(currentNode.word.equals(word)){
                 previousNode.setNextWordNode(currentNode.nextWordNode);
+                this.size--;
                 return true;
             }
             previousNode = currentNode;
