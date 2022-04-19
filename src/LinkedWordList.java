@@ -52,8 +52,17 @@ public class LinkedWordList {
     }
 
     public boolean remove(String word){
-        WordNode currentNode = firstWordNode;
-        WordNode previousNode = null;
+
+
+        if(firstWordNode.word.equals(word)){
+            this.firstWordNode = firstWordNode.nextWordNode;
+            this.size--;
+            return true;
+        }
+
+        WordNode currentNode = firstWordNode.nextWordNode;
+        WordNode previousNode = firstWordNode;
+
         while(currentNode != null){
             if(currentNode.word.equals(word)){
                 previousNode.setNextWordNode(currentNode.nextWordNode);
