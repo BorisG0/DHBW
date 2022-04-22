@@ -45,7 +45,7 @@ public class BinaryTree <T>{
 
     }
 
-    public void printInOrder(){
+    public void printInOrder(){ //left current right
         if(root == null){
             System.out.println("Tree is empty");
             return;
@@ -59,12 +59,62 @@ public class BinaryTree <T>{
             printInOrder(node.getLeftNode());
         }
 
-        System.out.println(node.getData());
+        System.out.print(node.getData() + ", ");
 
         if(node.getRightNode() != null){
             printInOrder(node.getRightNode());
         }
     }
+
+
+
+    public void printPreOrder(){ //current left right
+        if(root == null){
+            System.out.println("Tree is empty");
+            return;
+        }
+        printPreOrder(root);
+
+    }
+
+    public void printPreOrder(Node<T> node){
+        System.out.print(node.getData() + ", ");
+
+        if(node.getLeftNode() != null){
+            printPreOrder(node.getLeftNode());
+        }
+
+        if(node.getRightNode() != null){
+            printPreOrder(node.getRightNode());
+        }
+    }
+
+
+
+    public void printPostOrder(){ // left right current
+        if(root == null){
+            System.out.println("Tree is empty");
+            return;
+        }
+        printPostOrder(root);
+
+    }
+
+    public void printPostOrder(Node<T> node){
+
+
+        if(node.getLeftNode() != null){
+            printPostOrder(node.getLeftNode());
+        }
+
+        if(node.getRightNode() != null){
+            printPostOrder(node.getRightNode());
+        }
+
+        System.out.print(node.getData() + ", ");
+    }
+
+
 
 
     private class Node<T> {
@@ -116,7 +166,14 @@ public class BinaryTree <T>{
 
         System.out.println("size: " + myTree.size);
 
+        System.out.println("InOrder");
         myTree.printInOrder();
+
+        System.out.println("\nPreOrder");
+        myTree.printPreOrder();
+
+        System.out.println("\nPostOrder");
+        myTree.printPostOrder();
 
 
     }
