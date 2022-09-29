@@ -7,9 +7,8 @@ public class MyThread1 extends Thread{
     public void run(){
         try{
             Thread.sleep((int) (Math.random() * 1000));
-        }catch (Exception e) {
-            System.out.println("Hello World (ID = " + id + ")");
-        }
+        }catch (Exception e) {}
+        System.out.println("Hello World (ID = " + id + ")");
     }
 
     public static void main(String[] args) {
