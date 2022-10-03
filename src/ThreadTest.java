@@ -34,7 +34,8 @@ public class ThreadTest extends Thread{
         long start = System.nanoTime();
         sumWithoutThreads();
         long elapsedTime = System.nanoTime() - start;
-        System.out.println("Not Using Threads: "+ sum + " calculated in: " + elapsedTime + "ns or " + (((double)elapsedTime)/1000000) + "ms");
+        System.out.println("Not Using Threads: "+ sum + " calculated in: "
+                + elapsedTime + "ns or " + (((double)elapsedTime)/1000000) + "ms");
 
 
         for(int i = 2; i <= 128; i *= 2){
@@ -42,7 +43,8 @@ public class ThreadTest extends Thread{
             start = System.nanoTime();
             sumWithThreads(i);
             elapsedTime = System.nanoTime() - start;
-            System.out.println("Using " + i + " Threads: "+ sum + " calculated in: " + elapsedTime + "ns or " + (((double)elapsedTime)/1000000) + "ms");
+            System.out.println("Using " + i + " Threads: "+ sum + " calculated in: "
+                    + elapsedTime + "ns or " + (((double)elapsedTime)/1000000) + "ms");
         }
 
 
