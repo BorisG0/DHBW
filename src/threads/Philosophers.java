@@ -26,14 +26,12 @@ public class Philosophers {
                     forks[(id + 1) % forks.length].acquire();
                 }
 
-
                 System.out.println("Philosopher " + id + " eating");
                 for(int i = 0; i < 50; i++){
                     System.out.print(".");
                     Thread.sleep(40);
                 }
-                System.out.println();
-                System.out.println("Philosopher " + id + " finished");
+                System.out.println("\nPhilosopher " + id + " finished");
 
                 forks[id].release();
                 forks[(id + 1) % forks.length].release();
