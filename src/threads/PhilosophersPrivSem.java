@@ -6,7 +6,6 @@ public class PhilosophersPrivSem {
     static int numberOfPhilosophers = 5;
     static boolean usingTimer = false;
 
-
     static boolean[] hungry = new boolean[numberOfPhilosophers];
     static boolean[] eating = new boolean[numberOfPhilosophers];
 
@@ -39,8 +38,10 @@ public class PhilosophersPrivSem {
         public void run() {
             try{
                 System.out.println("Philosoph " + id + " denkend");
+
                 if(usingTimer)
                 Thread.sleep((int)(Math.random() * 5000));
+
                 System.out.println("Philosoph " + id + " wird hungrig");
 
                 mutex.acquire();
@@ -57,8 +58,10 @@ public class PhilosophersPrivSem {
 
                 //k.A.
                 System.out.println("Philosoph " + id + " essend");
+
                 if(usingTimer)
                 Thread.sleep((int)(Math.random() * 5000));
+
                 //k.A. Ende
 
                 mutex.acquire();
