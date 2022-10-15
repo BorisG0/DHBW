@@ -16,7 +16,6 @@ public class LokAufgB {
     static int stateLok1 = ausserhalbMittlereSchiene;
 
     static class Lok0 implements Runnable{
-
         @Override
         public void run() {
             try{

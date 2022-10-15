@@ -2,49 +2,8 @@ package threads;
 
 import java.util.concurrent.Semaphore;
 
-public class LokAufgA2 {
-    static LokAufgA2 bb = new LokAufgA2(1);
-
-    private int size;
-    private int onTrack;
-    private int waiting = -1;
-    private Semaphore full = new Semaphore(0, true);
-    private Semaphore empty;
-
-
-    public LokAufgA2(int size){
-        this.size = size;
-        empty = new Semaphore(size, true);
-    }
-
-    public void append(int id){
-         try{
-             System.out.println("Lok" + id + " kommt am");
-             empty.acquire();
-             System.out.println("Lok" + id + " auf mittlerer schiene");
-
-             onTrack = id;
-
-             full.release();
-
-         }catch(Exception e){
-             System.out.println(e);
-         }
-    }
-
-    public int remove(){
-        int toReturn = -1;
-        try{
-            System.out.println("Lok" + onTrack + " verlaesst");
-            full.acquire();
-            empty.release();
-
-        }catch(Exception e){
-            System.out.println(e);
-        }
-
-        return onTrack;
-    }
+public class LokAufgA3 {
+    static Semaphore track = new Semaphore(1, true);
 
     static class Lok0 implements Runnable{
         @Override
@@ -55,7 +14,7 @@ public class LokAufgA2 {
                     enterLok0();
                     Thread.sleep(1000);
                     exitLok0();
-                    Thread.sleep(1500);
+                    Thread.sleep(2000);
                 }
             }catch (Exception e){
                 System.out.println(e);
@@ -65,7 +24,9 @@ public class LokAufgA2 {
 
         void enterLok0(){
             try{
-                bb.append(0);
+                System.out.println("Lok0 am anfang mittlere Schiene");
+                track.acquire();
+                System.out.println("Lok0 auf mittlerer Schiene");
             }catch (Exception e){
                 System.out.println(e);
             }
@@ -73,11 +34,13 @@ public class LokAufgA2 {
 
         void exitLok0(){
             try{
-                bb.remove();
+                System.out.println("Lok0 verlaesst mittlere Schiene");
+                track.release();
             }catch (Exception e){
                 System.out.println(e);
             }
         }
+
     }
 
     static class Lok1 implements Runnable{
@@ -97,7 +60,9 @@ public class LokAufgA2 {
 
         void enterLok1(){
             try{
-                bb.append(1);
+                System.out.println("Lok1 am anfang mittlere Schiene");
+                track.acquire();
+                System.out.println("Lok1 auf mittlerer Schiene");
             }catch (Exception e){
                 System.out.println(e);
             }
@@ -105,7 +70,8 @@ public class LokAufgA2 {
 
         void exitLok1(){
             try{
-                bb.remove();
+                System.out.println("Lok1 verlaesst mittlere Schiene");
+                track.release();
             }catch (Exception e){
                 System.out.println(e);
             }
@@ -116,5 +82,4 @@ public class LokAufgA2 {
         new Thread(new Lok0()).start();
         new Thread(new Lok1()).start();
     }
-
 }
