@@ -6,6 +6,7 @@ public class Testat1B {
     static Semaphore mutex = new Semaphore(1, true);
     //mutex: gegenseitiger Ausschluss zum Lesen und Bearbeiten von kritischen Verwaltungsdaten
 
+    // Status, gehören zu kritischen Daten
     static final int NICHT_AUF_MITTLERER_SCHIENE = 0;
     static final int AUF_MITTLERER_SCHIENE = 1;
     static final int WARTET = 2;
@@ -24,12 +25,12 @@ public class Testat1B {
         public void run() {
             try{
                 Thread.sleep(1000); // Einzigartig für Lok0: 1 Sekunde warten,
-                                            // um zu prüfen ob Lok0 immer Schiene zuerst befährt, auch wenn sie nicht zuerst ankommt
+                                            // um zu prüfen, ob Lok0 immer Schiene zuerst befährt, auch wenn sie nicht zuerst ankommt
                 while(true){ // durch Aufgabe gegebene Struktur
                     enterLok0();
                     Thread.sleep(1000); //Zeit um mittlere Schiene vollständig zu befahren, bei Lok0 und Lok1 unterschiedlich
                     exitLok0();
-                    Thread.sleep(5000); //Zeit um den Rest des Kreis zu befahren
+                    Thread.sleep(5000); //Zeit um den Rest des Kreises zu befahren
                 }
             }catch(Exception e){
                 System.out.println(e);
@@ -39,7 +40,7 @@ public class Testat1B {
         void enterLok0(){
             try{
                 mutex.acquire();
-                if(istLok0AnDerReihe && (statusLok1 != AUF_MITTLERER_SCHIENE)){ //prüfen ob man an der Reihe ist und Schiene frei ist
+                if(istLok0AnDerReihe && (statusLok1 != AUF_MITTLERER_SCHIENE)){ //prüfen, ob man an der Reihe ist und Schiene frei ist
                     statusLok0 = AUF_MITTLERER_SCHIENE; // mittlere Schiene besetzen
                     privLok0.release(); // Semaphor im vorhinein freischalten, weil Befahren erlaubt ist
                 }else {
@@ -61,7 +62,7 @@ public class Testat1B {
                 System.out.println("Lok0 verlaesst mittlere Schiene");
                 statusLok0 = NICHT_AUF_MITTLERER_SCHIENE; // Schiene als frei markieren
                 istLok0AnDerReihe = false; // nächsten in der Reihe ändern, um Abwechslung zu sichern
-                if(statusLok1 == WARTET){ // abfragen ob andere Lok auf freischaltung warten und ggf. freischalten und Schiene als besetzt markieren
+                if(statusLok1 == WARTET){ // abfragen, ob andere Lok auf freischaltung warten und ggf. freischalten und Schiene als besetzt markieren
                     statusLok1 = AUF_MITTLERER_SCHIENE;
                     privLok1.release();
                 }

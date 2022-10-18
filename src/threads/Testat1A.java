@@ -6,7 +6,7 @@ public class Testat1A {
     static Semaphore empty = new Semaphore(1, true); //besagt ob Lok0 an der Reihe ist
     static Semaphore full = new Semaphore(0, true); //besagt ob Lok1 an der Reihe ist
 
-    static class Lok0 implements Runnable{
+    static class Lok0 implements Runnable{ // Kommentare in der Klasse Lok0 gelten auch für Lok1
         @Override
         public void run() {
             try{
@@ -16,7 +16,7 @@ public class Testat1A {
                     System.out.println("Lok0 auf mittlerer Schiene");
                     Thread.sleep(1000); //Zeit um mittlere Schiene vollständig zu befahren
                     exitLok0();
-                    Thread.sleep(5000); //Zeit um den Rest des Kreis zu befahren
+                    Thread.sleep(5000); //Zeit um den Rest des Kreises zu befahren
                 }
             }catch(Exception e){
                 System.out.println(e);
@@ -49,9 +49,9 @@ public class Testat1A {
                 while(true){
                     enterLok1();
                     System.out.println("Lok1 auf mittlerer Schiene");
-                    Thread.sleep(500); //Zeit um mittlere Schiene vollständig zu befahren
+                    Thread.sleep(500);
                     exitLok1();
-                    Thread.sleep(1500); //Zeit um den Rest des Kreis zu befahren
+                    Thread.sleep(1500);
                 }
             }catch(Exception e){
                 System.out.println(e);
