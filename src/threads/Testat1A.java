@@ -11,7 +11,7 @@ public class Testat1A {
         public void run() {
             try{
                 Thread.sleep(1000);
-                while(true){
+                while(true){ // durch Aufgabe gegebene Struktur
                     enterLok0();
                     System.out.println("Lok0 auf mittlerer Schiene");
                     Thread.sleep(1000); //Zeit um mittlere Schiene vollständig zu befahren
