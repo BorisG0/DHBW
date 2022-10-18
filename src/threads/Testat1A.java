@@ -1,5 +1,10 @@
 package threads;
-
+/*
+Testat: 1
+Teil: A
+Autoren: Boris Gratchev, Luca Grabowski
+Matrikelnummern: 87824551
+ */
 import java.util.concurrent.Semaphore;
 
 public class Testat1A {
