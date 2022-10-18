@@ -3,7 +3,7 @@ package threads;
 Testat: 1
 Teil: A
 Autoren: Boris Gratchev, Luca Grabowski
-Matrikelnummern: 87824551
+Matrikelnummern: 87824551, 7517076
  */
 import java.util.concurrent.Semaphore;
 

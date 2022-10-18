@@ -3,7 +3,7 @@ package threads;
 Testat: 1
 Teil: B
 Autoren: Boris Gratchev, Luca Grabowski
-Matrikelnummern: 87824551
+Matrikelnummern: 87824551, 7517076
  */
 import java.util.concurrent.Semaphore;
 
@@ -16,7 +16,7 @@ public class Testat1B {
     static final int AUF_MITTLERER_SCHIENE = 1;
     static final int WARTET = 2;
 
-    static boolean istLok0AnDerReihe = true; // Überblick darüber wer an der Reihe ist, um Abwechslung zu sichern
+    static boolean istLok0AnDerReihe = true; // Überblick darüber wer an der Reihe ist, um Abwechslung zu sichern, funktioniert nur bei 2 Loks
 
     static Semaphore privLok0 = new Semaphore(0, true); //privater Semaphor für Lok0, um sie aufzuwecken
     static int statusLok0 = NICHT_AUF_MITTLERER_SCHIENE;
