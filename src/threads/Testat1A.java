@@ -3,10 +3,10 @@ package threads;
 import java.util.concurrent.Semaphore;
 
 public class Testat1A {
-    static Semaphore empty = new Semaphore(1, true);
-    static Semaphore full = new Semaphore(0, true);
-    static class Lok0 implements Runnable{
+    static Semaphore empty = new Semaphore(1, true); //besagt ob Lok0 an der Reihe ist
+    static Semaphore full = new Semaphore(0, true); //besagt ob Lok1 an der Reihe ist
 
+    static class Lok0 implements Runnable{
         @Override
         public void run() {
             try{
@@ -43,7 +43,6 @@ public class Testat1A {
     }
 
     static class Lok1 implements Runnable{
-
         @Override
         public void run() {
             try{

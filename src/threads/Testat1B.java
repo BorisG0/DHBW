@@ -4,16 +4,19 @@ import java.util.concurrent.Semaphore;
 
 public class Testat1B {
     static Semaphore mutex = new Semaphore(1, true);
+    //mutex: gegenseitiger Ausschluss zum Lesen und Bearbeiten von kritischen Verwaltungsdaten
 
-    static boolean istMittlereSchieneFrei = true;
+    static final int NICHT_AUF_MITTLERER_SCHIENE = 0;
+    static final int AUF_MITTLERER_SCHIENE = 1;
+    static final int WARTET = 2;
 
-    static Semaphore privLok0 = new Semaphore(0, true);
-    static boolean istLok0AnDerReihe = true;
-    static boolean wartetLok0AnSchiene = false;
+    static boolean istLok0AnDerReihe = true; // Überblick darüber wer an der Reihe ist, um Abwechslung zu sichern
 
-    static Semaphore privLok1 = new Semaphore(0, true);
-    static boolean istLok1AnDerReihe = false;
-    static boolean wartetLok1AnSchiene = false;
+    static Semaphore privLok0 = new Semaphore(0, true); //privater Semaphor für Lok0, um sie aufzuwecken
+    static int statusLok0 = NICHT_AUF_MITTLERER_SCHIENE;
+
+    static Semaphore privLok1 = new Semaphore(0, true); //privater Semaphor für Lok1, um sie aufzuwecken
+    static int statusLok1 = NICHT_AUF_MITTLERER_SCHIENE;
 
 
     static class Lok0 implements Runnable{
@@ -35,11 +38,11 @@ public class Testat1B {
         void enterLok0(){
             try{
                 mutex.acquire();
-                if(istLok0AnDerReihe && istMittlereSchieneFrei){
-                    istMittlereSchieneFrei = false;
+                if(istLok0AnDerReihe && (statusLok1 != AUF_MITTLERER_SCHIENE)){
+                    statusLok0 = AUF_MITTLERER_SCHIENE;
                     privLok0.release();
                 }else {
-                    wartetLok0AnSchiene = true;
+                    statusLok0 = WARTET;
                     System.out.println("Lok0 wartet vor mittlerer Schiene");
                 }
                 mutex.release();
@@ -55,10 +58,10 @@ public class Testat1B {
             try{
                 mutex.acquire();
                 System.out.println("Lok0 verlaesst mittlere Schiene");
-                istMittlereSchieneFrei = true;
+                statusLok0 = NICHT_AUF_MITTLERER_SCHIENE;
                 istLok0AnDerReihe = false;
-                istLok1AnDerReihe = true;
-                if(wartetLok1AnSchiene){
+                if(statusLok1 == WARTET){
+                    statusLok1 = AUF_MITTLERER_SCHIENE;
                     privLok1.release();
                 }
                 mutex.release();
@@ -86,11 +89,11 @@ public class Testat1B {
         void enterLok1(){
             try{
                 mutex.acquire();
-                if(istLok1AnDerReihe && istMittlereSchieneFrei){
-                    istMittlereSchieneFrei = false;
+                if(!istLok0AnDerReihe && (statusLok0 != AUF_MITTLERER_SCHIENE)){
+                    statusLok1 = AUF_MITTLERER_SCHIENE;
                     privLok1.release();
                 }else {
-                    wartetLok1AnSchiene = true;
+                    statusLok1 = WARTET;
                     System.out.println("Lok1 wartet vor mittlerer Schiene");
                 }
                 mutex.release();
@@ -106,10 +109,10 @@ public class Testat1B {
             try{
                 mutex.acquire();
                 System.out.println("Lok1 verlaesst mittlere Schiene");
-                istMittlereSchieneFrei = true;
-                istLok1AnDerReihe = false;
+                statusLok1 = NICHT_AUF_MITTLERER_SCHIENE;
                 istLok0AnDerReihe = true;
-                if(wartetLok0AnSchiene){
+                if(statusLok0 == WARTET){
+                    statusLok0 = AUF_MITTLERER_SCHIENE;
                     privLok0.release();
                 }
                 mutex.release();
