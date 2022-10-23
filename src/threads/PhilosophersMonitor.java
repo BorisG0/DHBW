@@ -2,6 +2,7 @@ package threads;
 
 public class PhilosophersMonitor {
     static MyMonitor monitor;
+    //test
 
     static class MyMonitor{
         private boolean[] isForkFree;
