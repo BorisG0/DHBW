@@ -72,7 +72,7 @@ public class FileServer {
                 allLines.add(line);
                 line = fileIn.readLine();
             }
-            allLines.add(lineNumber, newLine);
+            allLines.add(lineNumber - 1, newLine);
 
             PrintWriter fileOut = new PrintWriter(new FileWriter(relativePath + fileName));
 
