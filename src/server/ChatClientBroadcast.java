@@ -4,15 +4,16 @@ import java.io.IOException;
 import java.net.*;
 import java.util.Scanner;
 
-public class ChatClient {
+public class ChatClientBroadcast {
+    private final static int port = 4998;
     public static void main(String[] args) {
         try {
             DatagramSocket socket = new DatagramSocket();
 
             byte[] data = "first message".getBytes();
 
-            InetAddress address = InetAddress.getByName("localhost");
-            DatagramPacket packet = new DatagramPacket(data, data.length, address, ChatServer.serverPort);
+            InetAddress address = InetAddress.getByName("255.255.255.255");
+            DatagramPacket packet = new DatagramPacket(data, data.length, address, port);
 
             socket.send(packet);
 
@@ -22,7 +23,7 @@ public class ChatClient {
             while (true){
                 message = scanner.nextLine();
                 data = message.getBytes();
-                packet = new DatagramPacket(data, data.length, address, ChatServer.serverPort);
+                packet = new DatagramPacket(data, data.length, address, port);
                 socket.send(packet);
             }
         } catch (SocketException e) {
