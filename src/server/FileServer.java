@@ -7,7 +7,7 @@ import java.net.SocketException;
 import java.util.ArrayList;
 
 public class FileServer {
-    private static String relativePath = new File("").getAbsolutePath().concat("/textFiles/");
+    private static String relativePath = "/Users/borisg/IdeaProjects/DHBW/textFiles/";
     public final static int serverPort = 4999;
 
     public static void main(String[] args) {

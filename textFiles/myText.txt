@@ -1,5 +1,7 @@
 this is line 1
 this is line 2
+newLine3
+hahaa
 lol
 this is line 3
 this is line 4
