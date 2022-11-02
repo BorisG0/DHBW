@@ -1,5 +1,11 @@
 package server;
 
+/*
+Testat: 2
+Autoren: Boris Gratchev, Tom Luca Grabowski
+Matrikelnummern: 87824551, 7517076
+ */
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -17,16 +23,16 @@ public class MessageClient {
 
 
             while(true){
-                String userLine = userIn.readLine();
+                String userLine = userIn.readLine(); //auf Tastatureingabe warten
 
-                socket = new Socket("localhost", MessageServer.DEFAULT_PORT);
+                socket = new Socket("localhost", MessageServer.DEFAULT_PORT); //Verbindung zum Server
                 networkIn = new BufferedReader(new InputStreamReader(socket.getInputStream()));
                 networkOut = new PrintWriter(socket.getOutputStream());
 
-                networkOut.println(userLine);
+                networkOut.println(userLine); //Befehl an Server schicken
                 networkOut.flush();
 
-                System.out.println(networkIn.readLine());
+                System.out.println(networkIn.readLine()); //Antwort vom Server anzeigen
             }
 
         } catch (IOException e) {
