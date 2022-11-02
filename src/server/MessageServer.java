@@ -12,12 +12,15 @@ public class MessageServer {
 
     public static void main(String[] args) {
         try {
+            //Server wird gestartet
+            System.out.println("starting server");
             ServerSocket server = new ServerSocket(DEFAULT_PORT);
             Socket connection;
             PrintWriter out;
             BufferedReader in;
 
-            String generalPath = "C:\\Users\\boris\\Desktop\\TextMessages\\";
+            String fileSeparator = File.separator;
+            String userDirectory = System.getProperty("user.home") + fileSeparator + "Desktop" + fileSeparator;
 
             while(true){
                 String lineOut = "";
@@ -31,12 +34,12 @@ public class MessageServer {
                     File file = null;
                     String key = "";
                     do{
-                        key = "" + ((int)(Math.random() * 5));
-                        file = new File(generalPath + key);
+                        key = "" + ((int)(Math.random() * 1000));
+                        file = new File(userDirectory + key);
 
                     }while(!file.createNewFile());
 
-                    FileWriter fileWriter = new FileWriter(generalPath + key);
+                    FileWriter fileWriter = new FileWriter(userDirectory + key);
                     fileWriter.write(lineInSplit[1]);
                     fileWriter.close();
 
@@ -46,7 +49,7 @@ public class MessageServer {
                 if(lineInSplit[0].equals("GET")){
                     String key = lineInSplit[1];
 
-                    File file = new File(generalPath + key);
+                    File file = new File(userDirectory + key);
                     if(file.exists()){
                         Scanner fileReader = new Scanner(file);
                         String data = fileReader.nextLine();

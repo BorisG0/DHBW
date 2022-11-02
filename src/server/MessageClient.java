@@ -9,6 +9,7 @@ import java.net.Socket;
 public class MessageClient {
     public static void main(String[] args) {
         try {
+            System.out.println("starting client");
             BufferedReader userIn = new BufferedReader(new InputStreamReader(System.in));
             Socket socket;
             BufferedReader networkIn;
