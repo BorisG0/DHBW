@@ -7,12 +7,12 @@ import java.net.SocketException;
 import java.util.ArrayList;
 
 public class FileServer {
-    private static String relativePath = "/Users/borisg/IdeaProjects/DHBW/textFiles/";
+    private static final String relativePath = "/Users/borisg/IdeaProjects/DHBW/textFiles/";
     public final static int DEFAULT_PORT = 4999;
 
 
     public static void main(String[] args) {
-        FileServer fileServer = new FileServer();
+        new FileServer();
     }
 
     class Worker implements Runnable{
@@ -58,7 +58,7 @@ public class FileServer {
             }
 
             String returnLine = "";
-            BufferedReader fileIn = null;
+            BufferedReader fileIn;
 
             try {
                 fileIn = new BufferedReader(new FileReader(relativePath + fileName));
