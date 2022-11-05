@@ -35,6 +35,7 @@ public class WorkerPoolWorker implements Runnable{
     }
 
     private void read(String fileName, int lineNo){
+        WorkerPoolServer.instance.startRead();
         WorkerPoolFile file = new WorkerPoolFile(fileName);
 
         String answer = file.read(lineNo);
@@ -47,9 +48,11 @@ public class WorkerPoolWorker implements Runnable{
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        WorkerPoolServer.instance.endRead();
     }
 
     private void write(String fileName, int lineNo, String data){
+        WorkerPoolServer.instance.startWrite();
         WorkerPoolFile file = new WorkerPoolFile(fileName);
 
         String answer = file.write(lineNo, data);
@@ -62,5 +65,6 @@ public class WorkerPoolWorker implements Runnable{
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        WorkerPoolServer.instance.endWrite();
     }
 }
