@@ -9,6 +9,7 @@ public class WorkerPoolServer {
     public static final int MAX_PACKET_SIZE = 65507;
 
     public static WorkerPoolServer instance; //Server dient gleichzeitig als Monitor
+    public WorkerPoolBuffer buffer;
 
     private int readCount = 0;
     private boolean isWriting = false;
@@ -23,6 +24,7 @@ public class WorkerPoolServer {
 
     WorkerPoolServer(){
         System.out.println("new server");
+        buffer = new WorkerPoolBuffer(8);
         try {
             socket = new DatagramSocket(DEFAULT_PORT);
         } catch (SocketException e) {
