@@ -9,9 +9,7 @@ public class WorkerPoolWorker implements Runnable{
     DatagramPacket packet;
     private DatagramSocket socket;
 
-    WorkerPoolWorker(DatagramPacket packet){
-        this.packet = packet;
-
+    WorkerPoolWorker(){
         try {
             socket = new DatagramSocket();
         } catch (SocketException e) {
@@ -21,10 +19,17 @@ public class WorkerPoolWorker implements Runnable{
 
     @Override
     public void run() {
+        while(true){
+            packet = WorkerPoolServer.instance.buffer.remove();
+            work();
+        }
+    }
+
+    private void work(){
         String message = new String(packet.getData(), 0, packet.getLength());
         String[] parts = message.split(" ", 2);
         String[] params = parts[1].split(",", 3);
-        
+
         if(parts[0].equals("READ")){
             read(params[0], Integer.parseInt(params[1]));
         }

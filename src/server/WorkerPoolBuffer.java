@@ -15,7 +15,7 @@ public class WorkerPoolBuffer {
     }
 
     public synchronized void append(DatagramPacket packet){
-        while (nextFree != ((nextFull + 1) % buffer.length)){
+        while (nextFree == ((nextFull + 1) % buffer.length)){
             try {
                 wait();
             } catch (InterruptedException e) {
@@ -30,8 +30,6 @@ public class WorkerPoolBuffer {
     }
 
     public synchronized DatagramPacket remove(){
-        DatagramPacket packet = null;
-
         while (nextFull == nextFree){
             try {
                 wait();
@@ -40,7 +38,7 @@ public class WorkerPoolBuffer {
             }
         }
 
-        packet = buffer[nextFull];
+        DatagramPacket packet = buffer[nextFull];
         nextFull = (nextFull + 1) % buffer.length;
 
         notifyAll();

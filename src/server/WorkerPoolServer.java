@@ -10,6 +10,9 @@ public class WorkerPoolServer {
 
     public static WorkerPoolServer instance; //Server dient gleichzeitig als Monitor
     public WorkerPoolBuffer buffer;
+    private int bufferSize = 8;
+
+    private int numberOfThreads = 3;
 
     private int readCount = 0;
     private boolean isWriting = false;
@@ -24,7 +27,7 @@ public class WorkerPoolServer {
 
     WorkerPoolServer(){
         System.out.println("new server");
-        buffer = new WorkerPoolBuffer(8);
+        buffer = new WorkerPoolBuffer(bufferSize);
         try {
             socket = new DatagramSocket(DEFAULT_PORT);
         } catch (SocketException e) {
@@ -34,6 +37,10 @@ public class WorkerPoolServer {
 
     public void start(){
         System.out.println("server started");
+        for(int i = 0; i < numberOfThreads; i++){
+            new Thread(new WorkerPoolWorker()).start();
+        }
+
         try {
             while(true){
                 DatagramPacket packet = new DatagramPacket(new byte[MAX_PACKET_SIZE], MAX_PACKET_SIZE);
@@ -46,7 +53,8 @@ public class WorkerPoolServer {
     }
 
     private void dispatch(DatagramPacket packet){
-        new Thread(new WorkerPoolWorker(packet)).start();
+        buffer.append(packet);
+        //new Thread(new WorkerPoolWorker(packet)).start();
     }
 
     synchronized void startRead(){
