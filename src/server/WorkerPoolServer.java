@@ -48,7 +48,7 @@ public class WorkerPoolServer {
     }
 
     synchronized void startRead(){
-        while(isWriting || (writeQueue > 0)){
+        while(isWriting || (writeQueue > 0)){ //warten, falls gerade geschrieben wird, oder geschrieben werden will
             try {
                 wait();
             } catch (InterruptedException e) {
@@ -64,8 +64,8 @@ public class WorkerPoolServer {
     }
 
     synchronized void startWrite(){
-        writeQueue++;
-        while (readCount > 0 || isWriting){
+        writeQueue++; //Wunsch zum Schreiben setzen
+        while (readCount > 0 || isWriting){ //warten, falls geschrieben oder gelesen wird
             try {
                 wait();
             } catch (InterruptedException e) {
@@ -78,5 +78,6 @@ public class WorkerPoolServer {
 
     synchronized void endWrite(){
         isWriting = false;
+        notifyAll();
     }
 }
