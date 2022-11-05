@@ -20,6 +20,7 @@ public class WorkerPoolWorker implements Runnable{
     @Override
     public void run() {
         while(true){
+            System.out.println("Worker(" + Thread.currentThread().getName() + ") waiting for packet");
             packet = WorkerPoolServer.instance.buffer.remove();
             work();
         }
@@ -40,6 +41,7 @@ public class WorkerPoolWorker implements Runnable{
     }
 
     private void read(String fileName, int lineNo){
+        System.out.println("Worker(" + Thread.currentThread().getName() + ") reading file: " + fileName + " line: " + lineNo);
         WorkerPoolServer.instance.startRead();
         WorkerPoolFile file = new WorkerPoolFile(fileName);
 
@@ -57,6 +59,7 @@ public class WorkerPoolWorker implements Runnable{
     }
 
     private void write(String fileName, int lineNo, String data){
+        System.out.println("Worker(" + Thread.currentThread().getName() + ") writing in file: " + fileName + " line: " + lineNo + " data: " + data);
         WorkerPoolServer.instance.startWrite();
         WorkerPoolFile file = new WorkerPoolFile(fileName);
 
