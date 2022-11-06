@@ -8,8 +8,8 @@ public class WorkerPoolServer {
     public static final int DEFAULT_PORT = 5999;
     public static final int MAX_PACKET_SIZE = 65507;
 
-    public static WorkerPoolServer instance; //Server dient gleichzeitig als Monitor
-    public WorkerPoolBuffer buffer;
+    public static WorkerPoolServer instance; //Server dient gleichzeitig als Monitor, durch instance erreichbar
+    public WorkerPoolBuffer buffer; //worker können über instance den buffer des servers erreichen
     private int bufferSize = 8;
 
     private int numberOfThreads = 3;
@@ -23,7 +23,7 @@ public class WorkerPoolServer {
 
     DatagramSocket socket;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) { //Server erstellen und starten
         instance = new WorkerPoolServer();
         instance.start();
     }
@@ -40,12 +40,13 @@ public class WorkerPoolServer {
 
     public void start(){
         System.out.println("server started");
-        for(int i = 0; i < numberOfThreads; i++){
+
+        for(int i = 0; i < numberOfThreads; i++){ // Alle Threads am beim Start erstellen und starten
             new Thread(new WorkerPoolWorker()).start();
         }
 
         try {
-            while(true){
+            while(true){ // Pakete empfangen und in den Buffer schreiben
                 DatagramPacket packet = new DatagramPacket(new byte[MAX_PACKET_SIZE], MAX_PACKET_SIZE);
                 socket.receive(packet);
                 dispatch(packet);
@@ -57,9 +58,10 @@ public class WorkerPoolServer {
 
     private void dispatch(DatagramPacket packet){
         buffer.append(packet);
-        //new Thread(new WorkerPoolWorker(packet)).start();
     }
 
+
+    //es folgen Methoden für die Funktionalität des Monitors
     synchronized void startRead(){
         while(isWriting || (writeQueue > 0)){ //warten, falls gerade geschrieben wird, oder geschrieben werden will
             try {
