@@ -1,5 +1,11 @@
 package server;
 
+/*
+Testat: 3
+Autoren: Boris Gratchev, Tom Luca Grabowski
+Matrikelnummern: 87824551, 7517076
+ */
+
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
