@@ -57,6 +57,7 @@ public class WorkerPoolServer {
     }
 
     private void dispatch(DatagramPacket packet){
+        System.out.println("Server: dispatching packet: address = " + packet.getAddress() + " port = " + packet.getPort());
         buffer.append(packet);
     }
 

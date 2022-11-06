@@ -20,7 +20,7 @@ public class WorkerPoolWorker implements Runnable{
     @Override
     public void run() {
         while(true){ //ab Start: ständig neue Pakete aus dem Buffer herausnehmen und bearbeiten
-            System.out.println("Worker(" + Thread.currentThread().getName() + ") waiting for packet");
+            System.out.println("Worker(" + Thread.currentThread().getName() + ") ready for packet");
             packet = WorkerPoolServer.instance.buffer.remove();
             work();
         }
@@ -73,6 +73,7 @@ public class WorkerPoolWorker implements Runnable{
     }
 
     private void sendAnswer(String answer){ //Antwortpaket verschicken
+        System.out.println("Worker(" + Thread.currentThread().getName() + ") sending answer: " + answer);
         byte[] returnData = answer.getBytes();
         DatagramPacket returnPacket = new DatagramPacket(returnData, returnData.length, packet.getAddress(), packet.getPort());
 
