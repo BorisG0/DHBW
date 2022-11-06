@@ -14,9 +14,12 @@ public class WorkerPoolServer {
 
     private int numberOfThreads = 3;
 
+    //-------------------------------------------------------------------
+    //Infos für Monitor
     private int readCount = 0;
     private boolean isWriting = false;
     private int writeQueue = 0;
+    //-------------------------------------------------------------------
 
     DatagramSocket socket;
 

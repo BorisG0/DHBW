@@ -42,10 +42,16 @@ public class WorkerPoolWorker implements Runnable{
 
     private void read(String fileName, int lineNo){
         System.out.println("Worker(" + Thread.currentThread().getName() + ") reading file: " + fileName + " line: " + lineNo);
-        WorkerPoolServer.instance.startRead();
-        WorkerPoolFile file = new WorkerPoolFile(fileName);
 
+        WorkerPoolServer.instance.startRead();
+        try {
+            Thread.sleep(10000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        WorkerPoolFile file = new WorkerPoolFile(fileName);
         String answer = file.read(lineNo);
+        WorkerPoolServer.instance.endRead();
 
         byte[] returnData = answer.getBytes();
         DatagramPacket returnPacket = new DatagramPacket(returnData, returnData.length, packet.getAddress(), packet.getPort());
@@ -55,15 +61,21 @@ public class WorkerPoolWorker implements Runnable{
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        WorkerPoolServer.instance.endRead();
+
     }
 
     private void write(String fileName, int lineNo, String data){
         System.out.println("Worker(" + Thread.currentThread().getName() + ") writing in file: " + fileName + " line: " + lineNo + " data: " + data);
-        WorkerPoolServer.instance.startWrite();
-        WorkerPoolFile file = new WorkerPoolFile(fileName);
 
+        WorkerPoolServer.instance.startWrite();
+        try {
+            Thread.sleep(10000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        WorkerPoolFile file = new WorkerPoolFile(fileName);
         String answer = file.write(lineNo, data);
+        WorkerPoolServer.instance.endWrite();
 
         byte[] returnData = answer.getBytes();
         DatagramPacket returnPacket = new DatagramPacket(returnData, returnData.length, packet.getAddress(), packet.getPort());
@@ -73,6 +85,6 @@ public class WorkerPoolWorker implements Runnable{
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        WorkerPoolServer.instance.endWrite();
+
     }
 }
