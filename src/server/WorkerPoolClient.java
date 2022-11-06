@@ -16,13 +16,13 @@ public class WorkerPoolClient {
             String message;
 
             while (true){
-                message = scanner.nextLine();
+                message = scanner.nextLine(); //Tastatureingabe lesen
                 data = message.getBytes();
                 packet = new DatagramPacket(data, data.length, address, WorkerPoolServer.DEFAULT_PORT);
-                socket.send(packet);
+                socket.send(packet); //Nachricht verschicken
 
                 DatagramPacket receivePacket = new DatagramPacket(new byte[WorkerPoolServer.MAX_PACKET_SIZE], WorkerPoolServer.MAX_PACKET_SIZE);
-                socket.receive(receivePacket);
+                socket.receive(receivePacket); //Antwort erhalten
 
                 String answer = new String(receivePacket.getData(), 0, receivePacket.getLength());
                 System.out.println(answer);

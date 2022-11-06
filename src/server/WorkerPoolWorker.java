@@ -6,7 +6,7 @@ import java.net.DatagramSocket;
 import java.net.SocketException;
 
 public class WorkerPoolWorker implements Runnable{
-    DatagramPacket packet;
+    DatagramPacket packet; //Paket als Attribut, da es von mehreren Methoden verwendet wird
     private DatagramSocket socket;
 
     WorkerPoolWorker(){
@@ -72,7 +72,7 @@ public class WorkerPoolWorker implements Runnable{
         sendAnswer(answer);
     }
 
-    private void sendAnswer(String answer){
+    private void sendAnswer(String answer){ //Antwortpaket verschicken
         byte[] returnData = answer.getBytes();
         DatagramPacket returnPacket = new DatagramPacket(returnData, returnData.length, packet.getAddress(), packet.getPort());
 

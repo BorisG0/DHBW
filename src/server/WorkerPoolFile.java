@@ -2,7 +2,7 @@ package server;
 
 import java.io.*;
 
-public class WorkerPoolFile {
+public class WorkerPoolFile { //Klasse übernommen aus Script: MyFile
     public static final String DEFAULT_PATH = System.getProperty("user.home") + File.separator + "Desktop" + File.separator + "FileServer" + File.separator;;
     String fileName;
 
