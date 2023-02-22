@@ -1,5 +1,6 @@
 package krypto;
 
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class Koinzidenzindex {
@@ -21,33 +22,29 @@ public class Koinzidenzindex {
     }
 
     public static double koinzidenzindex(String text, char[] alphabet){
+        HashMap<Character, Integer> frequencyMap = new HashMap<>();
+
         char space = ' ';
-        int[] frequencies = new int[alphabet.length];
         int sum = 0;
-        for(int i = 0; i < frequencies.length; i++){
-            frequencies[i] = 0;
+
+        for(int i = 0; i < alphabet.length; i++){
+            frequencyMap.put(alphabet[i], 0);
         }
 
-        a: for(int i = 0; i < text.length(); i++){
+        for(int i = 0; i < text.length(); i++){
             char currentChar = text.charAt(i);
-            if(currentChar == space) continue;
-
-            for(int j = 0; j < alphabet.length; j++){
-                if(currentChar == alphabet[j]){
-                    frequencies[j] = frequencies[j] + 1;
-                    sum++;
-                    continue a;
-                }
-            }
+            if(frequencyMap.get(currentChar) == null) continue;
+            frequencyMap.put(currentChar, frequencyMap.get(currentChar) + 1);
+            sum++;
         }
 
         if(sum == 0) return 0;
 
         double inzidenz = 0;
 
-        for(int i = 0; i < frequencies.length; i ++){
-            System.out.println(alphabet[i] + " " + i + " " + (frequencies[i] / ((double)sum)));
-            inzidenz += Math.pow(frequencies[i] / ((double)sum), 2);
+        for(char c: alphabet){
+            System.out.println(c + ": " + frequencyMap.get(c));
+            inzidenz += Math.pow(((double) frequencyMap.get(c)) / sum, 2);
         }
 
         return inzidenz;
