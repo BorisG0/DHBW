@@ -24,7 +24,6 @@ public class Koinzidenzindex {
     public static double koinzidenzindex(String text, char[] alphabet){
         HashMap<Character, Integer> frequencyMap = new HashMap<>();
 
-        char space = ' ';
         int sum = 0;
 
         for(int i = 0; i < alphabet.length; i++){
